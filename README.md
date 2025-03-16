@@ -18,9 +18,9 @@
 
 如果有其他建议也欢迎提出
 
-覆盖文件：
-CG_INN_buildings.txt：#组装建筑
-CG_INN_decisions.txt：#决议 行星圣殿（通用），#神爱世人
-CG_INN_events.txt：# 轨道轰炸
-CG_INN_councilors.txt：修改虔心崇圣和神爱世人的内阁席位
-CG_INN_section_templates.txt：火战车舰船区段
+覆盖文件：  
+CG_INN_buildings.txt：#组装建筑  
+CG_INN_decisions.txt：#决议 行星圣殿（通用），#神爱世人  
+CG_INN_events.txt：# 轨道轰炸  
+CG_INN_councilors.txt：修改虔心崇圣和神爱世人的内阁席位  
+CG_INN_section_templates.txt：火战车舰船区段  
