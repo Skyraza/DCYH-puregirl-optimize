@@ -2,7 +2,7 @@
 ============
 当前游戏版本：3.14.15926           多彩版本：2.1.0
 
-创意工坊链接: 
+创意工坊链接: https://steamcommunity.com/sharedfiles/filedetails/?id=3445471560&searchtext=
 
 
 
@@ -17,3 +17,10 @@
 7. 增加一个工程学t2科技“圣光区划设计”，减少50%区划产生的帝国规模，前置科技为光化反应；
 
 如果有其他建议也欢迎提出
+
+覆盖文件：
+CG_INN_buildings.txt：#组装建筑
+CG_INN_decisions.txt：#决议 行星圣殿（通用），#神爱世人
+CG_INN_events.txt：# 轨道轰炸
+CG_INN_councilors.txt：修改虔心崇圣和神爱世人的内阁席位
+CG_INN_section_templates.txt：火战车舰船区段
