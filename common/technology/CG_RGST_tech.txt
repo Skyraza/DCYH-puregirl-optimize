@@ -1,0 +1,83 @@
+#二级组装厂
+tech_holylight_clone_vats_2 = {
+	area = society
+	cost = @tier2cost3
+	tier = 1
+	category = { holy }
+	ai_update_type = all
+	is_rare = yes
+	weight = @tier2weight3
+	prerequisites = {
+		"tech_holylight_worship"
+	}
+	potential = { has_country_flag = asceticism_flag }
+	weight_modifier = {
+		factor = 1
+		modifier = {
+			factor = value:tech_weight_likelihood
+			has_trait_in_council = { TRAIT = leader_trait_innocent_scientist }
+		}
+		modifier = {
+			factor = 1.5
+			has_policy_flag = lust_forbidden
+		}
+		modifier = {
+			factor = @ap_technological_ascendancy_rare_tech
+			has_ascension_perk = ap_technological_ascendancy
+		}
+	}
+	ai_weight = {
+		factor = 3
+		modifier = {
+			factor = value:tech_weight_likelihood
+			has_trait_in_council = { TRAIT = leader_trait_innocent_scientist }
+		}
+		modifier = {
+			factor = 1.5
+			has_policy_flag = lust_forbidden
+		}
+		modifier = {
+			factor = @ap_technological_ascendancy_rare_tech
+			has_ascension_perk = ap_technological_ascendancy
+		}
+	}
+}
+
+#圣光区划设计
+tech_holylight_districts_design = {
+	area = engineering
+	cost = @tier2cost2
+	tier = 2
+	category = { holy }
+	ai_update_type = all
+	weight = @tier2weight2
+	prerequisites = {
+		"tech_holylight_virtual_image"
+	}
+	potential = { has_country_flag = asceticism_flag }
+	modifier = {
+		empire_size_districts_mult = -0.5
+	}
+	weight_modifier = {
+		factor = 1
+		modifier = {
+			factor = value:tech_weight_likelihood
+			has_trait_in_council = { TRAIT = leader_trait_innocent_scientist }
+		}
+		modifier = {
+			factor = 1.5
+			has_policy_flag = lust_forbidden
+		}
+	}
+	ai_weight = {
+		factor = 3
+		modifier = {
+			factor = value:tech_weight_likelihood
+			has_trait_in_council = { TRAIT = leader_trait_innocent_scientist }
+		}
+		modifier = {
+			factor = 1.5
+			has_policy_flag = lust_forbidden
+		}
+	}
+}

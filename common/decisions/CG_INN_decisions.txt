@@ -1,0 +1,1528 @@
+#异类洗礼,行星决策（单行星效果）
+decision_alien_baptism_thisplanet = {
+	owned_planets_only = yes
+	resources = {
+		category = decisions
+		cost = {
+			unity = 100
+			holylight_crystal = 100
+		}
+	}
+	prerequisites = { "tech_alien_baptism" }
+	potential = {
+		exists = owner
+		is_pure_empire = yes
+	}
+	allow = {
+		custom_tooltip = {
+			fail_text = HAD_ALIEN_BAPTISM_PROJECT
+			NOT = { has_modifier = CG_decision_alien_baptism_modifer }
+		}
+		custom_tooltip = {
+			fail_text = NEED_UGLY_ALIEN
+			any_owned_pop = {
+				OR = {
+					is_ugly_pop = yes
+					is_lithoid = yes
+				}
+			}
+		}
+	}
+	effect = {
+		hidden_effect = { planet_event = { id = CG_inn_decisions.30 } }
+	}
+	ai_weight = {
+		weight = 0
+		modifier = {
+			add = 20
+			count_owned_pop = { limit = { is_ugly_pop = yes } count > 20 }
+		}
+	}
+}
+
+#异类洗礼，首都决策
+decision_alien_baptism = {
+	owned_planets_only = yes
+	resources = {
+		category = decisions
+		cost = {
+			unity = 400
+			holylight_crystal = 400
+		}
+	}
+	prerequisites = { "tech_alien_baptism" }
+	potential = {
+		is_capital = yes
+		NOT = { has_modifier = CG_decision_alien_baptism_allplanet_modifer }
+		exists = owner
+		is_pure_empire = yes
+	}
+	allow = {
+		custom_tooltip = {
+			fail_text = NEED_UGLY_ALIEN2
+			owner = {
+				any_owned_pop = {
+					OR = {
+						is_ugly_pop = yes
+						is_lithoid = yes
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		add_modifier = { modifier = "CG_decision_alien_baptism_allplanet_modifer" days = 99 }
+		hidden_effect = {
+			owner = {
+				every_owned_planet = {
+					limit = {
+						any_owned_pop = {
+							OR = {
+								is_ugly_pop = yes
+								is_lithoid = yes
+							}
+						}
+						NOT = { has_modifier = CG_decision_alien_baptism_modifer }
+					}
+					planet_event = { id = CG_inn_decisions.30 }
+				}
+			}
+		}
+	}
+	ai_weight = {
+		weight = 0
+		modifier = {
+			add = 20
+			owner = { count_owned_pop = { limit = { is_ugly_pop = yes } count > 40 } }
+		}
+	}
+}
+
+#异端拯救计划，行星决策（单行星效果）
+decision_heretic_salvation_thisplanet = {
+	owned_planets_only = yes
+	resources = {
+		category = decisions
+		cost = {
+			unity = 200
+			holylight_crystal = 100
+		}
+	}
+	prerequisites = { "tech_heretic_salvation" }
+	potential = {
+		exists = owner
+		is_pure_empire = yes
+	}
+	allow = {
+		custom_tooltip = {
+			fail_text = HAD_HERETIC_SALVATION_PROJECT
+			NOT = { has_modifier = CG_decision_heretic_salvation_modifer }
+		}
+		custom_tooltip = {
+			fail_text = NEED_LUST_POP
+			any_owned_pop = { is_has_lust_trait = yes }
+		}
+	}
+	effect = {
+		hidden_effect = { planet_event = { id = CG_inn_decisions.40 } }
+	}
+	ai_weight = {
+		weight = 0
+		modifier = {
+			add = 20
+			count_owned_pop = { limit = { is_has_lust_trait = yes } count > 20 }
+		}
+	}
+}
+
+#异端拯救计划，首都决策（全帝国效果）
+decision_heretic_salvation = {
+	owned_planets_only = yes
+	resources = {
+		category = decisions
+		cost = {
+			unity = 800
+			holylight_crystal = 400
+		}
+	}
+	prerequisites = { "tech_heretic_salvation" }
+	potential = {
+		is_capital = yes
+		NOT = { has_modifier = CG_decision_heretic_salvation_allplanet_modifer }
+		exists = owner
+		is_pure_empire = yes
+	}
+	allow = {
+		custom_tooltip = {
+			fail_text = NEED_LUST_POP2
+			owner = { any_owned_pop = { is_has_lust_trait = yes } }
+		}
+	}
+	effect = {
+		add_modifier = { modifier = "CG_decision_heretic_salvation_allplanet_modifer" days = 720 }
+		hidden_effect = {
+			owner = {
+				every_owned_planet = {
+					limit = {
+						any_owned_pop = { is_has_lust_trait = yes }
+						NOT = { has_modifier = CG_decision_heretic_salvation_modifer }
+					}
+					planet_event = { id = CG_inn_decisions.40 }
+				}
+			}
+		}
+	}
+	ai_weight = {
+		weight = 0
+		modifier = {
+			add = 20
+			owner = { count_owned_pop = { limit = { is_has_lust_trait = yes } count > 40 } }
+		}
+	}
+}
+
+#机器人改造,行星决策（单行星效果）
+decision_robot_baptism_thisplanet = {
+	owned_planets_only = yes
+	resources = {
+		category = decisions
+		cost = {
+			unity = 100
+			holylight_crystal = 50
+		}
+	}
+	prerequisites = { "tech_robot_baptism" }
+	potential = {
+		exists = owner
+		is_pure_empire = yes
+	}
+	allow = {
+		custom_tooltip = {
+			fail_text = HAD_ROBOT_TRANSFORMING2_PROJECT
+			NOT = { has_modifier = CG_decision_robot_transforming2_modifer }
+		}
+		custom_tooltip = {
+			fail_text = NEED_SOME_ROBOT
+			any_owned_pop = {
+				OR = {
+					is_species_class = ROBOT
+					is_species_class = MACHINE
+				}
+			}
+		}
+	}
+	effect = {
+		hidden_effect = { planet_event = { id = CG_inn_decisions.20 } }
+	}
+	ai_weight = {
+		weight = 0
+		modifier = {
+			add = 20
+			count_owned_pop = {
+				limit = {
+					OR = {
+						is_species_class = ROBOT
+						is_species_class = MACHINE
+					}
+				}
+				count > 20
+			}
+		}
+	}
+}
+
+#机器人改造，首都决策（全帝国效果）
+decision_robot_baptism = {
+	owned_planets_only = yes
+	resources = {
+		category = decisions
+		cost = {
+			unity = 400
+			holylight_crystal = 200
+		}
+	}
+	prerequisites = { "tech_robot_baptism" }
+	potential = {
+		is_capital = yes
+		NOT = { has_modifier = CG_decision_robot_transforming2_allplanet_modifer }
+		exists = owner
+		is_pure_empire = yes
+	}
+	allow = {
+		custom_tooltip = {
+			fail_text = HAD_ROBOT_AND_PLANT
+			owner = {
+				any_owned_planet = {
+					any_owned_pop = {
+						OR = {
+							is_species_class = ROBOT
+							is_species_class = MACHINE
+						}
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		add_modifier = { modifier = "CG_decision_robot_transforming_allplanet_modifer" days = 720 }
+		hidden_effect = {
+			owner = {
+				every_owned_planet = {
+					limit = {
+						any_owned_pop = {
+							OR = {
+								is_species_class = ROBOT
+								is_species_class = MACHINE
+							}
+						}
+						NOT = { has_modifier = CG_decision_robot_transforming_modifer }
+					}
+					planet_event = { id = CG_inn_decisions.20 }
+				}
+			}
+		}
+	}
+	ai_weight = {
+		weight = 0
+		modifier = {
+			add = 20
+			owner = {
+				count_owned_pop = {
+					limit = {
+						OR = {
+							is_species_class = ROBOT
+							is_species_class = MACHINE
+						}
+					}
+					count > 40
+				}
+			}
+		}
+	}
+}
+
+#世界树迁移
+decision_INN_world_tree_transform = {
+	owned_planets_only = yes
+	resources = {
+		category = decisions
+		cost = {
+			food = 200
+		}
+	}
+	potential = {
+		is_colony = yes
+		NOR = {
+			has_modifier = INN_world_tree_modifier
+			has_modifier = INN_world_son_tree_modifier
+		}
+		exists = owner
+		owner = {
+			has_origin = origin_INN_world_tree
+			NOT = { has_country_flag = INN_world_tree_destory }
+		}
+	}
+	effect = {
+		add_modifier = { modifier = INN_world_son_tree_modifier }
+		add_building = building_world_tree_0
+	}
+	ai_weight = { weight = 1000 }
+}
+
+#世界树之祈祷
+decision_INN_world_tree_pray = {
+	owned_planets_only = yes
+	enactment_time = 50
+	resources = {
+		category = decisions
+		cost = {
+			influence = 50
+			food = 500
+			holylight_crystal = 50
+		}
+	}
+	potential = {
+		has_planet_flag = origin_INN_world_tree_on_start
+		exists = owner
+		owner = {
+			has_origin = origin_INN_world_tree
+			NOT = { any_owned_planet = { has_modifier = decision_INN_world_tree_pray_cooldown } }
+			NOT = { has_country_flag = INN_world_tree_destory }
+		}
+	}
+	effect = {
+		custom_tooltip = decision_INN_world_tree_pray.tooltip
+		hidden_effect = {
+			owner = {
+				every_owned_planet = {
+					limit = {
+						OR = {
+							has_modifier = INN_world_tree_modifier
+							has_modifier = INN_world_son_tree_modifier
+						}
+					}
+					create_pop = { species = owner_main_species }
+				}
+				every_subject = {
+					limit = {
+						any_owned_planet = {
+							has_holding = { holding = holding_world_tree owner = owner.overlord }
+						}
+					}
+					every_owned_planet = {
+						limit = {
+							has_holding = { holding = holding_world_tree owner = owner.overlord }
+						}
+						create_pop = { species = root.owner.owner_main_species }
+					}
+				}
+			}
+			add_modifier = { modifier = decision_INN_world_tree_pray_cooldown days = 900 }
+		}
+	}
+	ai_weight = { weight = 1000 }
+}
+
+#龙与少女
+decision_INN_dragon_knight = {
+	owned_planets_only = yes
+	resources = {
+		category = decisions
+		cost = {
+			trigger = {
+				owner = {
+					NOR = {
+						has_modifier = inn_crusade_1
+						has_modifier = inn_crusade_2
+						has_modifier = inn_crusade_3
+						has_modifier = inn_crusade_4
+						has_modifier = inn_crusade_5
+						has_modifier = inn_crusade_6
+						has_modifier = inn_crusade_7
+					}
+				}
+			}
+			unity = 20
+			food = 50
+		}
+		cost = {
+			trigger = { owner = { has_modifier = inn_crusade_1 } }
+			unity = 40
+			food = 100
+			holylight_crystal = 10
+		}
+		cost = {
+			trigger = { owner = { has_modifier = inn_crusade_2 } }
+			unity = 60
+			food = 200
+			holylight_crystal = 20
+		}
+		cost = {
+			trigger = { owner = { has_modifier = inn_crusade_3 } }
+			unity = 80
+			food = 350
+			holylight_crystal = 50
+		}
+		cost = {
+			trigger = {
+				owner = {
+					OR = {
+						has_modifier = inn_crusade_4
+						has_modifier = inn_crusade_5
+						has_modifier = inn_crusade_6
+						has_modifier = inn_crusade_7
+					}
+				}
+			}
+			unity = 100
+			food = 500
+			holylight_crystal = 100
+			sr_beauty = 5
+		}
+	}
+	potential = {
+		exists = owner
+		owner = {
+			has_origin = origin_INN_dragon_knight
+			NOR = {
+				has_country_flag = INN_dragon_destory
+				has_modifier = decision_INN_dragon_knight_cooldown
+			}
+		}
+	}
+	effect = {
+		solar_system = {
+			random_system_planet = {
+				limit = {
+					is_colonizable = no
+					is_colony = no
+					NOR = {
+						has_deposit_for = shipclass_mining_station
+						has_deposit_for = shipclass_research_station
+					}
+				}
+				add_deposit = d_dragon_20
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { owner = { has_modifier = inn_crusade_7 } }
+				owner = { add_modifier = { modifier = decision_INN_dragon_knight_cooldown days = 720 } }
+			}
+			else_if = {
+				limit = { owner = { has_modifier = inn_crusade_6 } }
+				owner = { add_modifier = { modifier = decision_INN_dragon_knight_cooldown days = 1080 } }
+			}
+			else_if = {
+				limit = { owner = { has_modifier = inn_crusade_5 } }
+				owner = { add_modifier = { modifier = decision_INN_dragon_knight_cooldown days = 1440 } }
+			}
+			else = {
+				owner = { add_modifier = { modifier = decision_INN_dragon_knight_cooldown days = 1800 } }
+			}
+		}
+		owner = {
+			if = {
+				limit = {
+					NOR = {
+						has_modifier = inn_crusade_1
+						has_modifier = inn_crusade_2
+						has_modifier = inn_crusade_3
+						has_modifier = inn_crusade_4
+						has_modifier = inn_crusade_5
+						has_modifier = inn_crusade_6
+						has_modifier = inn_crusade_7
+					}
+				}
+				create_fleet = {
+					effect = {
+						set_owner = prev
+						create_ship = {
+							design = "NAME_INN_dragon_paopao_design"
+							prefix = no
+							upgradable = no
+							effect = { add_modifier = { modifier = INN_dragon_paopao_modifier } }
+						}
+						set_location = {
+							target = root
+							distance = 45
+							angle = random
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = { owner = { has_modifier = inn_crusade_1 } }
+				create_fleet = {
+					effect = {
+						set_owner = prev
+						create_ship = {
+							design = "NAME_INN_dragon_swarm_queen_design"
+							prefix = no
+							upgradable = no
+							effect = { add_modifier = { modifier = INN_dragon_swarm_queen_modifier } }
+						}
+						set_location = {
+							target = root
+							distance = 45
+							angle = random
+						}
+					}
+					settings = {
+						spawn_debris = no
+					}
+				}
+			}
+			else_if = {
+				limit = { owner = { has_modifier = inn_crusade_2 } }
+				create_fleet = {
+					effect = {
+						set_owner = prev
+						create_ship = {
+							design = "NAME_INN_dragon_baby_design"
+							prefix = no
+							upgradable = no
+							effect = { add_modifier = { modifier = INN_dragon_baby_modifier } }
+						}
+						set_location = {
+							target = root
+							distance = 45
+							angle = random
+						}
+					}
+					settings = {
+						spawn_debris = no
+					}
+				}
+			}
+			else_if = {
+				limit = { owner = { has_modifier = inn_crusade_3 } }
+				create_fleet = {
+					effect = {
+						set_owner = prev
+						create_ship = {
+							design = "NAME_INN_dragon_Wraith_450THz"
+							prefix = no
+							upgradable = no
+							effect = { add_modifier = { modifier = INN_dragon_Wraith_450THz_modifier } }
+						}
+						set_location = {
+							target = root
+							distance = 45
+							angle = random
+						}
+					}
+					settings = {
+						spawn_debris = no
+					}
+				}
+			}
+			else = {
+				create_fleet = {
+					effect = {
+						set_owner = prev
+						create_ship = {
+							design = "NAME_INN_dragon_red"
+							prefix = no
+							upgradable = no
+							effect = { add_modifier = { modifier = INN_dragon_red_modifier } }
+						}
+						set_location = {
+							target = root
+							distance = 45
+							angle = random
+						}
+					}
+					settings = {
+						spawn_debris = no
+					}
+				}
+			}
+		}
+	}
+	ai_weight = { weight = 1000 }
+}
+
+#决议 行星圣殿
+decision_pc_holylight_city_project = {
+	owned_planets_only = yes
+	enactment_time = 360
+	resources = {
+		category = decisions
+		cost = {
+			unity = 500
+			energy = 5000
+			minerals = 5000
+			holylight_crystal = 2000
+			sr_christian = 1000
+		}
+	}
+	potential = {
+		always = no
+		NOR = {
+			is_planet_class = pc_holylight_city
+			is_planet_class = pc_holylight_ring_world
+			is_planet_class = pc_ringworld_habitable
+			is_planet_class = pc_holylight_flower
+			has_modifier = resort_colony
+			has_modifier = penal_colony
+			has_modifier = slave_colony
+		}
+		habitable_structure = no
+		exists = owner
+		owner = {
+			has_technology = tech_pc_holylight_city
+			OR = {
+				has_modifier = inn_crusade_7
+				AND = {
+					has_origin = origin_INN_world_tree
+					any_owned_planet = { has_building = building_world_tree_5 }
+				}
+			}
+		}
+	}
+	allow = {
+		OR = {
+			AND = {
+				num_uncleared_blockers < 1
+				is_colony = yes
+				free_district_slots < 1
+			}
+			is_planet_class = pc_gaia
+		}
+	}
+	effect = {
+		custom_tooltip = decision_pc_holylight_city_project_effects
+		custom_tooltip = decision_pc_holylight_city_project_effects_short
+		hidden_effect = {
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_city }
+				variable = district_city
+			}
+			divide_variable = { which = district_city value = 4 }
+			floor_variable = district_city
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_industrial }
+				variable = district_industrial
+			}
+			divide_variable = { which = district_industrial value = 4 }
+			floor_variable = district_industrial
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_farming }
+				variable = district_farming
+			}
+			divide_variable = { which = district_farming value = 4 }
+			floor_variable = district_farming
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_mining }
+				variable = district_mining
+			}
+			divide_variable = { which = district_mining value = 4 }
+			floor_variable = district_mining
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_generator }
+				variable = district_generator
+			}
+			divide_variable = { which = district_generator value = 4 }
+			floor_variable = district_generator
+			change_pc = pc_holylight_city
+			add_deposit = d_holylight_city
+			set_planet_entity = {
+				entity = "pc_holylight_city"
+				graphical_culture = owner
+			}
+			while = {
+				count = district_city
+				add_district = district_holylight_city
+			}
+			while = {
+				count = district_industrial
+				add_district = district_holylight_public
+			}
+			while = {
+				count = district_farming
+				add_district = district_holylight_reserve
+			}
+			while = {
+				count = district_generator
+				add_district = district_holylight_reserve
+			}
+			while = {
+				count = district_mining
+				add_district = district_holylight_private
+			}
+			planet_event = { id = CG_inn.20 }
+		}
+	}
+	ai_weight = { weight = 1000 }
+}
+
+#决议 神圣圆环
+decision_pc_holylight_ring_world_project = {
+	owned_planets_only = yes
+	icon = decision_prostitution_project
+	enactment_time = 360
+	resources = {
+		category = decisions
+		cost = {
+			unity = 500
+			energy = 5000
+			minerals = 5000
+			holylight_crystal = 2000
+			sr_christian = 1000
+		}
+	}
+	potential = {
+		always = no
+		is_ringworld = yes
+		NOR = {
+			is_planet_class = pc_holylight_ring_world
+			has_modifier = resort_colony
+			has_modifier = penal_colony
+			has_modifier = slave_colony
+		}
+		exists = owner
+		owner = {
+			has_technology = tech_pc_holylight_city
+			OR = {
+				has_modifier = inn_crusade_7
+				AND = {
+					has_origin = origin_INN_world_tree
+					any_owned_planet = { has_building = building_world_tree_5 }
+				}
+			}
+		}
+	}
+	allow = {
+		num_uncleared_blockers < 1
+	}
+	effect = {
+		custom_tooltip = decision_pc_holylight_ring_world_project_effects
+		custom_tooltip = decision_pc_holylight_ring_world_project_effects_short
+		hidden_effect = {
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_rw_city }
+				variable = district_rw_city
+			}
+			divide_variable = { which = district_rw_city value = 4 }
+			floor_variable = district_rw_city
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_rw_industrial }
+				variable = district_rw_industrial
+			}
+			divide_variable = { which = district_rw_industrial value = 4 }
+			floor_variable = district_rw_industrial
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_rw_farming }
+				variable = district_rw_farming
+			}
+			divide_variable = { which = district_rw_farming value = 4 }
+			floor_variable = district_rw_farming
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_rw_science }
+				variable = district_rw_science
+			}
+			divide_variable = { which = district_rw_science value = 4 }
+			floor_variable = district_rw_science
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_rw_generator }
+				variable = district_rw_generator
+			}
+			divide_variable = { which = district_rw_generator value = 4 }
+			floor_variable = district_rw_generator
+			change_pc = pc_holylight_ring_world
+			add_deposit = d_holylight_city
+			set_planet_entity = {
+				entity = "pc_holylight_ring_world"
+				graphical_culture = owner
+			}
+			while = {
+				count = district_rw_city
+				add_district = district_holylight_ring_world_city
+			}
+			while = {
+				count = district_rw_industrial
+				add_district = district_holylight_ring_world_private
+			}
+			while = {
+				count = district_rw_farming
+				add_district = district_holylight_ring_world_public
+			}
+			while = {
+				count = district_rw_science
+				add_district = district_holylight_ring_world_reserve
+			}
+			while = {
+				count = district_rw_generator
+				add_district = district_holylight_ring_world_reserve
+			}
+			planet_event = { id = CG_inn.21 }
+		}
+	}
+	ai_weight = { weight = 1000 }
+}
+
+#决议 行星圣殿（通用）
+decision_pc_holylight_city_project_normal = {
+	owned_planets_only = yes
+	icon = decision_pc_holylight_city_project
+	enactment_time = 3600
+	resources = {
+		category = decisions
+		cost = {
+			unity = 5000
+			energy = 10000
+			minerals = 10000
+			holylight_crystal = 5000
+			sr_christian = 1000
+		}
+	}
+	prerequisites = { "tech_pc_holylight_city" }
+	potential = {
+		NOR = {
+			is_planet_class = pc_holylight_city
+			is_planet_class = pc_holylight_ring_world
+			is_planet_class = pc_ringworld_habitable
+			is_planet_class = pc_holylight_flower
+			has_modifier = resort_colony
+			has_modifier = penal_colony
+			has_modifier = slave_colony
+		}
+		habitable_structure = no
+		exists = owner
+		owner = { is_pure_empire = yes }
+	}
+	allow = {
+		OR = {
+			AND = {
+				num_uncleared_blockers < 1
+				is_colony = yes
+				free_district_slots < 1
+			}
+			is_planet_class = pc_gaia
+		}
+		custom_tooltip = {
+			fail_text = CG_DECISION_PLANET_TERRAFORM_LIMIT
+			#owner = { NOT = { has_country_flag = CG_decision_planet_terraform_limit } }
+		}
+	}
+	on_queued = { owner = { set_country_flag = CG_decision_planet_terraform_limit } }
+	on_unqueued = { owner = { remove_country_flag = CG_decision_planet_terraform_limit } }
+	effect = {
+		custom_tooltip = decision_pc_holylight_city_project_effects
+		custom_tooltip = decision_pc_holylight_city_project_effects_short
+		hidden_effect = {
+			owner = { remove_country_flag = CG_decision_planet_terraform_limit }
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_city }
+				variable = district_city
+			}
+			divide_variable = { which = district_city value = 4 }
+			floor_variable = district_city
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_industrial }
+				variable = district_industrial
+			}
+			divide_variable = { which = district_industrial value = 4 }
+			floor_variable = district_industrial
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_farming }
+				variable = district_farming
+			}
+			divide_variable = { which = district_farming value = 4 }
+			floor_variable = district_farming
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_mining }
+				variable = district_mining
+			}
+			divide_variable = { which = district_mining value = 4 }
+			floor_variable = district_mining
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_generator }
+				variable = district_generator
+			}
+			divide_variable = { which = district_generator value = 4 }
+			floor_variable = district_generator
+			change_pc = pc_holylight_city
+			add_deposit = d_holylight_city
+			set_planet_entity = {
+				entity = "pc_holylight_city"
+				graphical_culture = owner
+			}
+			while = {
+				count = district_city
+				add_district = district_holylight_city
+			}
+			while = {
+				count = district_industrial
+				add_district = district_holylight_public
+			}
+			while = {
+				count = district_farming
+				add_district = district_holylight_reserve
+			}
+			while = {
+				count = district_generator
+				add_district = district_holylight_reserve
+			}
+			while = {
+				count = district_mining
+				add_district = district_holylight_private
+			}
+			planet_event = { id = CG_inn.20 }
+		}
+	}
+	ai_weight = { weight = 1000 }
+}
+
+#决议 神圣圆环（通用）
+decision_pc_holylight_ring_world_project_normal = {
+	owned_planets_only = yes
+	icon = decision_prostitution_project
+	enactment_time = 3600
+	resources = {
+		category = decisions
+		cost = {
+			unity = 5000
+			energy = 10000
+			minerals = 10000
+			holylight_crystal = 5000
+			sr_christian = 1000
+		}
+	}
+	prerequisites = { "tech_pc_holylight_city" }
+	potential = {
+		is_ringworld = yes
+		NOR = {
+			is_planet_class = pc_holylight_ring_world
+			has_modifier = resort_colony
+			has_modifier = penal_colony
+			has_modifier = slave_colony
+		}
+		exists = owner
+		owner = { is_pure_empire = yes }
+	}
+	allow = {
+		num_uncleared_blockers < 1
+	}
+	effect = {
+		custom_tooltip = decision_pc_holylight_ring_world_project_effects
+		custom_tooltip = decision_pc_holylight_ring_world_project_effects_short
+		hidden_effect = {
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_rw_city }
+				variable = district_rw_city
+			}
+			divide_variable = { which = district_rw_city value = 4 }
+			floor_variable = district_rw_city
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_rw_industrial }
+				variable = district_rw_industrial
+			}
+			divide_variable = { which = district_rw_industrial value = 4 }
+			floor_variable = district_rw_industrial
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_rw_farming }
+				variable = district_rw_farming
+			}
+			divide_variable = { which = district_rw_farming value = 4 }
+			floor_variable = district_rw_farming
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_rw_science }
+				variable = district_rw_science
+			}
+			divide_variable = { which = district_rw_science value = 4 }
+			floor_variable = district_rw_science
+			export_trigger_value_to_variable = {
+				trigger = num_districts
+				parameters = { type = district_rw_generator }
+				variable = district_rw_generator
+			}
+			divide_variable = { which = district_rw_generator value = 4 }
+			floor_variable = district_rw_generator
+			change_pc = pc_holylight_ring_world
+			add_deposit = d_holylight_city
+			set_planet_entity = {
+				entity = "pc_holylight_ring_world"
+				graphical_culture = owner
+			}
+			while = {
+				count = district_rw_city
+				add_district = district_holylight_ring_world_city
+			}
+			while = {
+				count = district_rw_industrial
+				add_district = district_holylight_ring_world_private
+			}
+			while = {
+				count = district_rw_farming
+				add_district = district_holylight_ring_world_public
+			}
+			while = {
+				count = district_rw_science
+				add_district = district_holylight_ring_world_reserve
+			}
+			while = {
+				count = district_rw_generator
+				add_district = district_holylight_ring_world_reserve
+			}
+			planet_event = { id = CG_inn.21 }
+		}
+	}
+	ai_weight = { weight = 1000 }
+}
+
+#仪式：跨越无限
+decision_holylight_god_unlimited = {
+	owned_planets_only = yes
+	enactment_time = 30
+	resources = {
+		category = decisions
+		cost = {
+			sr_beauty = 1500
+			sr_christian = 1500
+		}
+	}
+	prerequisites = { "tech_holylight_god_unlimited" }
+	potential = {
+		is_capital = yes
+		exists = owner
+		owner = {
+			is_pure_empire = yes
+			NOT = { has_modifier = CG_holylight_god_unlimited_modifer }
+		}
+	}
+	effect = {
+		owner = { add_modifier = { modifier = CG_holylight_god_unlimited_modifer days = 1800 } }
+		custom_tooltip = CG_holylight_god_unlimited_modifer_effect
+	}
+	ai_weight = { weight = 1000 }
+}
+
+decision_skeleton_jingguan_remove = {
+	owned_planets_only = yes
+	enactment_time = 180
+	resources = {
+		category = decisions
+		cost = {
+			energy = 1000
+		}
+	}
+	potential = {
+		exists = owner
+		owner = { NOT = { has_valid_civic = civic_punish_for_sodom } }
+		count_deposits = { count > 0 type = d_skeleton_jingguan }
+	}
+	effect = {
+		while = {
+			limit = { count_deposits = { count > 0 type = d_skeleton_jingguan } }
+			remove_deposit = d_skeleton_jingguan
+		}
+	}
+	ai_weight = { weight = 100 }
+}
+
+#圣树启灵
+decision_holy_tree = {
+	owned_planets_only = yes
+	enactment_time = 1
+	resources = {
+		category = decisions
+		cost = {
+			food = 999
+			minerals = 999
+			unity = 999
+			influence = 99
+		}
+	}
+	potential = {
+		exists = owner
+		owner = { has_valid_civic = civic_holy_tree }
+	}
+	allow = {
+		OR = {
+			has_building = building_holy_cathedral
+			has_building = building_holy_taiqing_palace
+		}
+		OR = {
+			has_modifier = INN_world_tree_modifier
+			has_modifier = INN_world_son_tree_modifier
+		}
+		solar_system = {
+			any_system_planet = {
+				OR = {
+					is_planet_class = pc_molten
+					is_planet_class = pc_barren
+					is_planet_class = pc_barren_cold
+					is_planet_class = pc_toxic
+					is_planet_class = pc_frozen
+				}
+			}
+			count_system_planet = {
+				limit = {
+					OR = {
+						is_colonizable = yes
+						is_colony = yes
+					}
+				}
+				count < 4
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = decision_holy_tree_effects_short
+		hidden_effect = {
+			solar_system = {
+				random_system_planet = {
+					limit = {
+						OR = {
+							is_planet_class = pc_molten
+							is_planet_class = pc_frozen
+							is_planet_class = pc_barren
+							is_planet_class = pc_barren_cold
+							is_planet_class = pc_toxic
+						}
+					}
+					if = {
+						limit = { is_planet_class = pc_molten }
+						random_list = {
+							42 = { change_pc = pc_desert }
+							42 = { change_pc = pc_arid }
+							15 = { change_pc = pc_continental }
+							1 = { change_pc = pc_gaia }
+						}
+					}
+					else_if = {
+						limit = { is_planet_class = pc_frozen }
+						random_list = {
+							32 = { change_pc = pc_alpine }
+							32 = { change_pc = pc_arctic }
+							20 = { change_pc = pc_ocean }
+							15 = { change_pc = pc_continental }
+							1 = { change_pc = pc_gaia }
+						}
+					}
+					else_if = {
+						limit = { is_planet_class = pc_barren }
+						random_list = {
+							84 = { change_pc = pc_savannah }
+							15 = { change_pc = pc_continental }
+							1 = { change_pc = pc_gaia }
+						}
+					}
+					else_if = {
+						limit = { is_planet_class = pc_barren_cold }
+						random_list = {
+							84 = { change_pc = pc_tundra }
+							15 = { change_pc = pc_continental }
+							1 = { change_pc = pc_gaia }
+						}
+					}
+					else = {
+						random_list = {
+							45 = { change_pc = pc_nuked }
+							31 = { change_pc = pc_tropical }
+							23 = { change_pc = pc_continental }
+							1 = { change_pc = pc_gaia }
+						}
+					}
+					reroll_planet = yes
+				}
+			}
+		}
+	}
+	ai_weight = { weight = 100 }
+}
+
+#神爱世人
+#去除9个限制
+decision_holy_wisdom = {
+	owned_planets_only = yes
+	enactment_time = 99
+	resources = {
+		category = decisions
+		cost = {
+			energy = 999
+			unity = 999
+		}
+	}
+	potential = {
+		exists = owner
+		owner = { has_valid_civic = civic_god_loves_people }
+	}
+	allow = {
+		OR = {
+			any_owned_pop = { has_trait = trait_heartless_shojo }
+			AND = {
+				owner = { has_technology = tech_alien_baptism }
+				custom_tooltip = {
+					fail_text = NEED_UGLY_ALIEN
+					any_owned_pop = {
+						OR = {
+							is_ugly_pop = yes
+							is_lithoid = yes
+						}
+					}
+				}
+			}
+			AND = {
+				owner = { has_technology = tech_heretic_salvation }
+				custom_tooltip = {
+					fail_text = NEED_LUST_POP
+					any_owned_pop = { species = { is_archetype = Magical_Bitch } }
+				}
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = decision_holy_wisdom_effects_short
+		hidden_effect = {
+			if = {
+				limit = { owner = { has_technology = tech_alien_baptism } }
+				every_owned_pop = {
+					limit = {
+						OR = {
+							is_ugly_pop = yes
+							is_lithoid = yes
+						}
+					}
+					prev = { change_variable = { which = total_ugly_pop value = 1 } }
+				}
+				if = {
+					limit = { owner = { has_event_chain = inn_crusade_chain } }
+					if = {
+						limit = { check_variable = { which = total_ugly_pop value < 9 } }
+						owner = {
+							add_event_chain_counter = {
+								event_chain = "inn_crusade_chain"
+								counter = "heartless_shojo_trans"
+								amount = total_ugly_pop
+							}
+							change_variable = { which = "num_heartless_shojo_trans" value = total_ugly_pop }
+						}
+					}
+					else = {
+						owner = {
+							add_event_chain_counter = {
+								event_chain = "inn_crusade_chain"
+								counter = "heartless_shojo_trans"
+								#amount = 9
+								amount = total_ugly_pop
+							}
+							#change_variable = { which = "num_heartless_shojo_trans" value = 9 }
+							change_variable = { which = "num_heartless_shojo_trans" value = total_ugly_pop }
+						}
+					}
+					owner = { country_event = { id = CG_inn.31 days = 3 } }
+				}
+				if = {
+					limit = { check_variable = { which = total_ugly_pop value >= 9 } }
+					while = {
+						#count = 9
+						#random_owned_pop = {
+						every_owned_pop = {
+							limit = {
+								OR = {
+									is_ugly_pop = yes
+									is_lithoid = yes
+								}
+							}
+							change_species = owner_main_species
+						}
+					}
+				}
+				else = {
+					every_owned_pop = {
+						limit = {
+							OR = {
+								is_ugly_pop = yes
+								is_lithoid = yes
+							}
+						}
+						change_species = owner_main_species
+					}
+					#set_variable = { which = total_heartless_shojo value = 9 }
+					set_variable = { which = total_heartless_shojo value = total_ugly_pop }
+					subtract_variable = { which = total_heartless_shojo value = total_ugly_pop }
+					while = {
+						count = total_heartless_shojo
+						random_owned_pop = {
+							limit = { has_trait = trait_heartless_shojo }
+							change_species = owner_main_species
+						}
+					}
+				}
+			}
+			else = {
+				while = {
+					#count = 9
+					#random_owned_pop = {
+					every_owned_pop = {
+						limit = { has_trait = trait_heartless_shojo }
+						change_species = owner_main_species
+					}
+				}
+			}
+			set_variable = { which = total_ugly_pop value = 0 }
+			if = {
+				limit = { owner = { has_technology = tech_heretic_salvation } }
+				every_owned_pop = {
+					limit = {
+						OR = {
+							species = { is_archetype = Magical_Bitch }
+							has_trait = trait_lust_inn
+						}
+					}
+					change_species = owner_main_species
+				}
+			}
+		}
+	}
+	ai_weight = { weight = 20 }
+}
+
+#守护者
+decision_mind_break = {
+	owned_planets_only = yes
+	icon = decision_holylight_god_unlimited
+	enactment_time = 999
+	resources = {
+		category = decisions
+		cost = {
+			influence = 99
+			unity = 9999
+			alloys = 9999
+			sr_beauty = 999
+		}
+	}
+	potential = {
+		is_planet_class = pc_holylight_flower
+		exists = owner
+		owner = { NOT = { has_country_flag = mind_break_finish } }
+	}
+	allow = {
+		owner = {
+			OR = {
+				has_modifier = inn_crusade_7
+				AND = {
+					has_origin = origin_INN_world_tree
+					any_owned_planet = { has_building = building_world_tree_5 }
+				}
+				NOR = {
+					has_origin = origin_INN_world_tree
+					has_origin = origin_INN_dragon_knight
+				}
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = decision_mind_break_effects
+		hidden_effect = { planet_event = { id = mind_break.10 } }
+	}
+	ai_weight = { weight = 1000 }
+}
+
+decision_holylight_world_tree_leaf = {
+	owned_planets_only = yes
+	enactment_time = 180
+	resources = {
+		category = decisions
+		cost = {
+			holylight_crystal = 500
+		}
+	}
+	potential = {
+		exists = owner
+		owner = {
+			has_country_flag = holylight_world_tree_leaf
+			NOT = { any_owned_ship = { is_ship_size = holylight_world_tree_leaf } }
+		}
+		is_capital = yes
+	}
+	effect = {
+		custom_tooltip = decision_holylight_world_tree_leaf_effects
+		hidden_effect = {
+			create_fleet = {
+				effect = {
+					create_ship = { design = "NAME_holylight_world_tree_leaf" }
+					set_owner = root.owner
+					set_location = root
+				}
+			}
+		}
+	}
+	ai_weight = { weight = 1000 }
+}
+
+decision_inn_butterfly_lead_04 = {
+	owned_planets_only = no
+	resources = {
+		category = decisions
+		cost = {
+			alloys = 200
+			food = 200
+			consumer_goods = 200
+			holylight_crystal = 200
+		}
+	}
+	potential = {
+		exists = space_owner
+		exists = from
+		space_owner = { is_same_value = from }
+		from = { has_tradition = inn_butterfly_lead_04 }
+		is_star = no
+		is_colony = no
+		is_colonizable = yes
+	}
+	effect = {
+		custom_tooltip = decision_inn_butterfly_lead_04_effects
+		hidden_effect = {
+			set_owner = from
+			create_pop = { species = from.owner_main_species }
+		}
+	}
+	ai_weight = { weight = 50 }
+}
+
+decision_holy_projection = {
+	owned_planets_only = yes
+	resources = {
+		category = decisions
+		cost = {
+			unity = 100
+			holylight_crystal = 200
+		}
+	}
+	prerequisites = { "tech_holylight_effect_of_medicine" }
+	potential = {
+		exists = owner
+		owner = {
+			has_policy_flag = lust_forbidden
+			is_pure_empire = yes
+		}
+	}
+	allow = { NOT = { has_modifier = CG_decision_holy_projection_modifier } }
+	effect = { add_modifier = { modifier = "CG_decision_holy_projection_modifier" days = 1800 } }
+	ai_weight = {
+		weight = 5
+		modifier = {
+			factor = 0
+			num_pops < 50
+		}
+	}
+}
+
+decision_holy_emotional_energy = {
+	owned_planets_only = yes
+	resources = {
+		category = decisions
+		cost = {
+			unity = 300
+			holylight_crystal = 500
+		}
+	}
+	prerequisites = { "tech_forced_belief" }
+	potential = {
+		exists = owner
+		owner = {
+			has_policy_flag = lust_forbidden
+			is_pure_empire = yes
+		}
+	}
+	allow = { NOT = { has_modifier = CG_decision_holy_emotional_energy_modifier } }
+	effect = { add_modifier = { modifier = "CG_decision_holy_emotional_energy_modifier" days = 1800 } }
+	ai_weight = {
+		weight = 0
+		modifier = {
+			add = 5
+			owner = {
+				any_situation = {
+					OR = {
+						is_situation_type = situation_energy_deficit
+						is_situation_type = situation_food_deficit
+						is_situation_type = situation_mineral_deficit
+					}
+				}
+			}
+		}
+	}
+}

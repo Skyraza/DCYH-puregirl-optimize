@@ -1,0 +1,2073 @@
+################################################################################
+# holy buildings #  圣女建筑
+################################################################################
+############################
+###########资源建筑###########
+############################
+############一产############
+#圣能生产工作站
+building_holylight_workstation = {
+	base_buildtime = @b1_time
+	category = resource
+	prerequisites = { "tech_holylight_production" }
+	potential = { is_pure_empire = yes }
+	upgrades = { building_holylight_workstation2 }
+	convert_to = { building_commercial_zone }
+	ai_resource_production = {
+		trigger = { always = yes }
+		energy = 30
+		minerals = 30
+		food = 30
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b1_minerals
+		}
+		upkeep = {
+			energy = @b1_upkeep
+		}
+	}
+	planet_modifier = {
+		job_holylight_worker_add = @b1_jobs
+	}
+	triggered_desc = {
+		trigger = {
+			exists = owner
+			owner = { is_regular_empire = yes }
+		}
+		text = job_holylight_worker_desc
+	}
+	on_built = { planet_event = { id = CM_daily.210 days = 1080 } }
+	destroy_trigger = { is_pure_empire = no }
+}
+
+#圣光大型工作站
+building_holylight_workstation2 = {
+	base_buildtime = @b2_time
+	category = resource
+	can_build = no
+	convert_to = { building_commercial_megaplex }
+	ai_resource_production = {
+		trigger = { always = yes }
+		energy = 100
+		minerals = 100
+		food = 100
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b2_minerals
+		}
+		upkeep = {
+			energy = @b2_upkeep
+		}
+	}
+	planet_modifier = {
+		job_holylight_worker_add = 4
+	}
+	triggered_desc = {
+		trigger = {
+			exists = owner
+			owner = { is_regular_empire = yes }
+		}
+		text = job_holylight_worker_desc
+	}
+	destroy_trigger = { is_pure_empire = no }
+}
+
+#魅魔教导所
+building_succubus_shelter = {
+	base_buildtime = @b1_time
+	category = resource
+	potential = {
+		owner = {
+			is_pure_empire = yes
+			NOT = { has_valid_civic = civic_fanatic_purifiers }
+		}
+		OR = {
+			owner = { is_ai = no }
+			count_owned_pop = {
+				count >= 5
+				limit = {
+					is_species_class = Magical_Bitch
+					is_unemployed = yes
+				}
+			}
+		}
+	}
+	convert_to = { building_commercial_zone }
+	destroy_trigger = {
+		owner = {
+			OR = {
+				is_pure_empire = no
+				has_valid_civic = civic_fanatic_purifiers
+			}
+		}
+	}
+	planet_modifier = {
+		job_succubus_student_add = 9
+		planet_housing_add = 9
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b1_minerals
+		}
+		upkeep = {
+			energy = @b1_upkeep
+		}
+	}
+}
+
+############特殊二产############
+#信徒培训机构
+building_christian_training_sector = {
+	base_buildtime = @b2_time
+	category = resource
+	prerequisites = { "tech_christian_train" }
+	potential = { is_pure_empire = yes }
+	convert_to = { building_commercial_megaplex }
+	allow = {
+		any_owned_pop = { is_has_pure_trait = yes }
+		OR = {
+			has_building = building_holy_church
+			has_building = building_holy_cathedral
+			has_building = building_national_cathedral
+			has_building = building_holy_guanmiao_terrace
+			has_building = building_holy_taiqing_palace
+		}
+	}
+	ai_resource_production = {
+		trigger = { always = yes }
+		sr_christian = 30
+	}
+	planet_modifier = {
+		job_holy_mother_add = 6
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			energy = @b2_energy
+			minerals = @b2_minerals
+		}
+		upkeep = {
+			energy = @b2_upkeep
+		}
+	}
+	destroy_trigger = { is_pure_empire = no }
+}
+
+############特殊三产############
+#天堂学园
+building_heaven_college = {
+	base_buildtime = @b3_time
+	category = resource
+	icon = building_beauty_college
+	base_cap_amount = 1
+	is_capped_by_modifier = yes
+	prerequisites = { "tech_beauty_theory" }
+	show_tech_unlock_if = { is_pure_empire = yes }
+	convert_to = { building_commercial_megaplex }
+	ai_resource_production = {
+		trigger = { always = yes }
+		sr_beauty = 30
+	}
+	potential = { is_pure_empire = yes }
+	allow = { planet_size > 19 }
+	planet_modifier = {
+		job_beauty_teacher2_add = 1
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_trait = trait_beautiful
+			}
+		}
+		modifier = {
+			job_beauty_teacher2_add = 1
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b3_minerals
+		}
+		upkeep = {
+			energy = @b3_upkeep
+			consumer_goods = @b3_consumer_goods_upkeep
+		}
+	}
+	triggered_desc = { text = job_beauty_teacher2_college_effect_desc }
+	destroy_trigger = { is_pure_empire = no }
+}
+
+############################
+###########制造建筑###########
+############################
+############消费品###########
+#微光礼品工房
+building_shimmering_gift_plant = {
+	base_buildtime = @b1_time
+	category = manufacturing
+	prerequisites = { "tech_addholylight" }
+	potential = { can_build_asceticism_buildings = yes }
+	allow = { is_owned_prayer_buildings = yes }
+	ai_resource_production = {
+		trigger = { always = yes }
+		consumer_goods = 30
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b1_minerals
+		}
+		upkeep = {
+			energy = @b1_upkeep
+		}
+	}
+	planet_modifier = {
+		job_shimmering_gift_artisan_add = 2
+		planet_jobs_consumer_goods_produces_mult = 0.01
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+	upgrades = { building_shimmering_gift_plant2 }
+}
+
+# 微光礼品生产厂2
+building_shimmering_gift_plant2 = {
+	base_buildtime = @b2_time
+	can_build = no
+	category = manufacturing
+	prerequisites = { "tech_shimmer_instrument_develop" }
+	allow = {
+		OR = {
+			has_building = building_holy_church
+			has_building = building_holy_cathedral
+			has_building = building_national_cathedral
+			has_building = building_holy_guanmiao_terrace
+			has_building = building_holy_taiqing_palace
+		}
+	}
+	ai_resource_production = {
+		trigger = { always = yes }
+		consumer_goods = 100
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b2_minerals
+			holylight_crystal = @b2_holylight_crystal
+			rare_crystals = @b2_holylight_crystal
+		}
+		upkeep = {
+			energy = @b2_upkeep
+			rare_crystals = @b2_rare_upkeep
+			holylight_crystal = @b2_rare_upkeep
+		}
+	}
+	planet_modifier = {
+		job_shimmering_gift_artisan_add = 4
+		planet_jobs_consumer_goods_produces_mult = 0.02
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+	upgrades = { building_shimmering_gift_plant3 }
+}
+
+# 微光礼品生产基地
+building_shimmering_gift_plant3 = {
+	base_buildtime = @b3_time
+	can_build = no
+	category = manufacturing
+	prerequisites = { "tech_shimmer_peak_facility" }
+	allow = {
+		OR = {
+			has_building = building_holy_cathedral
+			has_building = building_national_cathedral
+			has_building = building_holy_taiqing_palace
+		}
+	}
+	ai_resource_production = {
+		trigger = { always = yes }
+		consumer_goods = 200
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b3_minerals
+			holylight_crystal = @b3_holylight_crystal
+			rare_crystals = @b3_holylight_crystal
+		}
+		upkeep = {
+			energy = @b3_upkeep
+			rare_crystals = @b3_rare_upkeep
+			holylight_crystal = @b3_rare_upkeep
+		}
+	}
+	planet_modifier = {
+		job_shimmering_gift_artisan_add = 6
+		planet_jobs_consumer_goods_produces_mult = 0.03
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+}
+
+############合金############
+# 圣光冶金厂
+building_holylight_industry = {
+	base_buildtime = @b1_time
+	category = manufacturing
+	prerequisites = { "tech_holylight_metallurgy" }
+	potential = { can_build_asceticism_buildings = yes }
+	allow = { is_owned_prayer_buildings = yes }
+	ai_resource_production = {
+		trigger = { always = yes }
+		alloys = 30
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b1_minerals
+		}
+		upkeep = {
+			energy = @b1_upkeep
+		}
+	}
+	planet_modifier = {
+		job_holylight_foundry_add = 2
+		planet_jobs_alloys_produces_mult = 0.01
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+	upgrades = { building_holylight_industry2 }
+}
+
+# 圣光冶金厂2
+building_holylight_industry2 = {
+	base_buildtime = @b2_time
+	can_build = no
+	category = manufacturing
+	prerequisites = { "tech_shimmer_instrument_develop" }
+	allow = {
+		OR = {
+			has_building = building_holy_church
+			has_building = building_holy_cathedral
+			has_building = building_national_cathedral
+			has_building = building_holy_guanmiao_terrace
+			has_building = building_holy_taiqing_palace
+		}
+	}
+	ai_resource_production = {
+		trigger = { always = yes }
+		alloys = 100
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b2_minerals
+			holylight_crystal = @b2_holylight_crystal
+			volatile_motes = @b2_holylight_crystal
+		}
+		upkeep = {
+			energy = @b2_upkeep
+			holylight_crystal = @b2_rare_upkeep
+			volatile_motes = @b2_rare_upkeep
+		}
+	}
+	planet_modifier = {
+		job_holylight_foundry_add = 4
+		planet_jobs_alloys_produces_mult = 0.02
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+	upgrades = { building_holylight_industry3 }
+}
+
+# 圣光冶金中心
+building_holylight_industry3 = {
+	base_buildtime = @b3_time
+	can_build = no
+	category = manufacturing
+	prerequisites = { "tech_shimmer_peak_facility" }
+	allow = {
+		OR = {
+			has_building = building_holy_cathedral
+			has_building = building_national_cathedral
+			has_building = building_holy_taiqing_palace
+		}
+	}
+	ai_resource_production = {
+		trigger = { always = yes }
+		alloys = 200
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b3_minerals
+			holylight_crystal = @b3_holylight_crystal
+			volatile_motes = @b3_holylight_crystal
+		}
+		upkeep = {
+			energy = @b3_upkeep
+			holylight_crystal = @b3_rare_upkeep
+			volatile_motes = @b3_rare_upkeep
+		}
+	}
+	planet_modifier = {
+		job_holylight_foundry_add = 6
+		planet_jobs_alloys_produces_mult = 0.03
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+}
+
+############精炼############
+#圣光精炼装置
+building_holylight_refineries = {
+	base_buildtime = @b2_time
+	category = manufacturing
+	prerequisites = { "tech_shimmer_peak_facility" }
+	convert_to = { building_refinery }
+	potential = { can_build_asceticism_buildings = yes }
+	allow = {
+		OR = {
+			owner = { has_ascension_perk = ap_holy_light_remove_seal }
+			is_owned_prayer_buildings = yes
+		}
+	}
+	ai_resource_production = {
+		trigger = { always = yes }
+		volatile_motes = 30
+		rare_crystals = 30
+		exotic_gases = 30
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b2_minerals
+		}
+		upkeep = {
+			energy = @b2_upkeep
+		}
+	}
+	planet_modifier = {
+		job_holylight_refiner_add = 1
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+	upgrades = { "building_holylight_refineries2" }
+}
+
+#光化反应炉
+building_holylight_refineries2 = {
+	base_buildtime = @b3_time
+	category = manufacturing
+	can_build = no
+	prerequisites = { "tech_holylight_crystal_release" }
+	convert_to = { building_chemical_plant }
+	allow = {
+		OR = {
+			has_building = building_holy_cathedral
+			has_building = building_national_cathedral
+			has_building = building_holy_taiqing_palace
+		}
+	}
+	ai_resource_production = {
+		trigger = { always = yes }
+		volatile_motes = 100
+		rare_crystals = 100
+		exotic_gases = 100
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b3_minerals
+		}
+		upkeep = {
+			energy = @b3_upkeep
+		}
+	}
+	planet_modifier = {
+		job_holylight_refiner2_add = 2
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+}
+
+############################
+###########凝聚建筑###########
+############################
+############教堂############
+#礼拜堂
+building_holy_chapel = {
+	base_buildtime = @b1_time
+	category = unity
+	base_cap_amount = 1
+	prerequisites = { "tech_recasting_bible" }
+	show_tech_unlock_if = { NOT = { has_valid_civic = civic_holylight_usual } }
+	convert_to = {
+		building_holy_taoist_temple
+		building_autochthon_monument
+	}
+	potential = {
+		can_build_asceticism_buildings = yes
+		NOT = { owner = { has_valid_civic = civic_holylight_usual } }
+	}
+	destroy_trigger = {
+		OR = {
+			can_build_asceticism_buildings = no
+			owner = { has_valid_civic = civic_holylight_usual }
+		}
+	}
+	triggered_desc = { text = building_holy_chapel_effect_desc }
+	ai_resource_production = {
+		trigger = { always = yes }
+		unity = 100
+		holylight_crystal = 30
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b1_minerals
+		}
+		upkeep = {
+			energy = @b1_upkeep
+		}
+		produces = {
+			energy = 1.5
+			minerals = 1.5
+			food = 1.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_workstation
+					has_building = building_holylight_workstation2
+				}
+			}
+		}
+		produces = {
+			physics_research = 1.5
+			society_research = 1.5
+			engineering_research = 1.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_research_college
+					has_building = building_holylight_research_college2
+					has_building = building_holylight_research_college3
+				}
+			}
+		}
+		produces = {
+			consumer_goods = 1
+			trigger = {
+				OR = {
+					has_building = building_shimmering_gift_plant
+					has_building = building_shimmering_gift_plant2
+					has_building = building_shimmering_gift_plant3
+				}
+			}
+		}
+		produces = {
+			alloys = 0.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_industry
+					has_building = building_holylight_industry2
+					has_building = building_holylight_industry3
+				}
+			}
+		}
+		produces = {
+			sr_christian = 0.25
+			trigger = { has_building = building_christian_training_sector }
+		}
+		produces = {
+			sr_beauty = 0.125
+			trigger = { has_building = building_heaven_college }
+		}
+	}
+	planet_modifier = {
+		job_holy_sister_add = 4
+		planet_max_buildings_add = 1
+	}
+	upgrades = { building_holy_church }
+	on_built = { hidden_effect = { planet_event = { id = CM_daily.190 days = 1080 } } }
+}
+
+# 教堂
+building_holy_church = {
+	base_buildtime = @b2_time
+	can_build = no
+	category = unity
+	prerequisites = { "tech_holylight_materialization" }
+	show_tech_unlock_if = { NOT = { has_valid_civic = civic_holylight_usual } }
+	convert_to = {
+		building_holy_guanmiao_terrace
+		building_heritage_site
+	}
+	allow = { has_upgraded_capital = yes }
+	triggered_desc = { text = building_holy_chapel_effect_desc }
+	ai_resource_production = {
+		trigger = { always = yes }
+		unity = 300
+		holylight_crystal = 100
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b2_minerals
+			holylight_crystal = @b2_holylight_crystal
+		}
+		upkeep = {
+			energy = @b2_upkeep
+		}
+		produces = {
+			energy = 3
+			minerals = 3
+			food = 3
+			trigger = {
+				OR = {
+					has_building = building_holylight_workstation
+					has_building = building_holylight_workstation2
+				}
+			}
+		}
+		produces = {
+			physics_research = 3
+			society_research = 3
+			engineering_research = 3
+			trigger = {
+				OR = {
+					has_building = building_holylight_research_college
+					has_building = building_holylight_research_college2
+					has_building = building_holylight_research_college3
+				}
+			}
+		}
+		produces = {
+			consumer_goods = 2
+			trigger = {
+				OR = {
+					has_building = building_shimmering_gift_plant
+					has_building = building_shimmering_gift_plant2
+					has_building = building_shimmering_gift_plant3
+				}
+			}
+		}
+		produces = {
+			alloys = 1
+			trigger = {
+				OR = {
+					has_building = building_holylight_industry
+					has_building = building_holylight_industry2
+					has_building = building_holylight_industry3
+				}
+			}
+		}
+		produces = {
+			sr_christian = 0.5
+			trigger = { has_building = building_christian_training_sector }
+		}
+		produces = {
+			sr_beauty = 0.25
+			trigger = { has_building = building_heaven_college }
+		}
+	}
+	planet_modifier = {
+		job_holy_prayer_add = 2
+		job_holy_sister_add = 6
+		planet_max_buildings_add = 1
+	}
+	destroy_trigger = {
+		OR = {
+			can_build_asceticism_buildings = no
+			owner = { has_valid_civic = civic_holylight_usual }
+		}
+	}
+	upgrades = { building_holy_cathedral }
+}
+
+# 大教堂
+building_holy_cathedral = {
+	base_buildtime = @b3_time
+	can_build = no
+	category = unity
+	prerequisites = { "tech_holylight_worship" }
+	show_tech_unlock_if = { NOT = { has_valid_civic = civic_holylight_usual } }
+	convert_to = {
+		building_holy_taiqing_palace
+		building_hypercomms_forum
+	}
+	allow = { has_major_upgraded_capital = yes }
+	triggered_desc = { text = building_holy_chapel_effect_desc }
+	ai_resource_production = {
+		trigger = { always = yes }
+		unity = 500
+		holylight_crystal = 200
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b3_minerals
+			holylight_crystal = @b3_holylight_crystal
+		}
+		upkeep = {
+			energy = @b3_upkeep
+		}
+		produces = {
+			energy = 4.5
+			minerals = 4.5
+			food = 4.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_workstation
+					has_building = building_holylight_workstation2
+				}
+			}
+		}
+		produces = {
+			physics_research = 4.5
+			society_research = 4.5
+			engineering_research = 4.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_research_college
+					has_building = building_holylight_research_college2
+					has_building = building_holylight_research_college3
+				}
+			}
+		}
+		produces = {
+			consumer_goods = 3
+			trigger = {
+				OR = {
+					has_building = building_shimmering_gift_plant
+					has_building = building_shimmering_gift_plant2
+					has_building = building_shimmering_gift_plant3
+				}
+			}
+		}
+		produces = {
+			alloys = 1.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_industry
+					has_building = building_holylight_industry2
+					has_building = building_holylight_industry3
+				}
+			}
+		}
+		produces = {
+			sr_christian = 0.75
+			trigger = { has_building = building_christian_training_sector }
+		}
+		produces = {
+			sr_beauty = 0.375
+			trigger = { has_building = building_heaven_college }
+		}
+	}
+	planet_modifier = {
+		job_holylight_bishop_add = 1
+		job_holy_prayer_add = 4
+		job_holy_sister_add = 8
+		planet_max_buildings_add = 1
+	}
+	destroy_trigger = {
+		OR = {
+			can_build_asceticism_buildings = no
+			owner = { has_valid_civic = civic_holylight_usual }
+		}
+	}
+}
+
+#国家大教堂
+building_national_cathedral = {
+	base_buildtime = @b4_time
+	base_cap_amount = 1
+	empire_limit = { base = 1 }
+	category = unity
+	prerequisites = { "tech_beauty_theory" }
+	show_tech_unlock_if = { is_pure_empire = yes }
+	potential = { is_pure_empire = yes }
+	ai_resource_production = {
+		trigger = { always = yes }
+		unity = 500
+		holylight_crystal = 500
+	}
+	allow = { has_major_upgraded_capital = yes }
+	planet_modifier = {
+		planet_jobs_unity_produces_mult = 0.15
+		pop_happiness = 0.05
+		planet_stability_add = 5
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { is_regular_empire = yes }
+		}
+		modifier = {
+			job_holy_prayer_add = 4
+			job_holy_sister_add = 8
+			job_holylight_bishop_add = 2
+			job_holylight_archbishop_add = 1
+			job_holylight_virgin_add = 1
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b4_minerals
+			holylight_crystal = @b4_holylight_crystal
+			sr_christian = @b4_sr_christian
+		}
+		upkeep = {
+			energy = @b4_upkeep
+			sr_christian = @b4_sr_christian_upkeep
+		}
+	}
+	triggered_desc = {
+		trigger = {
+			exists = owner
+			owner = { is_regular_empire = yes }
+		}
+		text = building_national_cathedral_effect_desc
+	}
+	destroy_trigger = { is_pure_empire = no }
+}
+
+building_holy_taoist_temple = {
+	base_buildtime = @b1_time
+	category = unity
+	base_cap_amount = 1
+	prerequisites = { "tech_recasting_bible" }
+	show_tech_unlock_if = { has_valid_civic = civic_holylight_usual }
+	convert_to = {
+		building_holy_chapel
+		building_autochthon_monument
+	}
+	potential = {
+		can_build_asceticism_buildings = yes
+		owner = { has_valid_civic = civic_holylight_usual }
+	}
+	destroy_trigger = {
+		OR = {
+			can_build_asceticism_buildings = no
+			NOT = { owner = { has_valid_civic = civic_holylight_usual } }
+		}
+	}
+	triggered_desc = { text = building_holy_chapel_effect_desc }
+	ai_resource_production = {
+		trigger = { always = yes }
+		unity = 100
+		holylight_crystal = 30
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b1_minerals
+		}
+		upkeep = {
+			energy = @b1_upkeep
+		}
+		produces = {
+			energy = 1.5
+			minerals = 1.5
+			food = 1.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_workstation
+					has_building = building_holylight_workstation2
+				}
+			}
+		}
+		produces = {
+			physics_research = 1.5
+			society_research = 1.5
+			engineering_research = 1.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_research_college
+					has_building = building_holylight_research_college2
+					has_building = building_holylight_research_college3
+				}
+			}
+		}
+		produces = {
+			consumer_goods = 1
+			trigger = {
+				OR = {
+					has_building = building_shimmering_gift_plant
+					has_building = building_shimmering_gift_plant2
+					has_building = building_shimmering_gift_plant3
+				}
+			}
+		}
+		produces = {
+			alloys = 0.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_industry
+					has_building = building_holylight_industry2
+					has_building = building_holylight_industry3
+				}
+			}
+		}
+		produces = {
+			sr_christian = 0.25
+			trigger = { has_building = building_christian_training_sector }
+		}
+		produces = {
+			sr_beauty = 0.125
+			trigger = { has_building = building_heaven_college }
+		}
+	}
+	planet_modifier = {
+		trade_value_add = 4
+		job_holy_friar_add = 4
+		planet_max_buildings_add = 1
+	}
+	upgrades = { building_holy_guanmiao_terrace }
+}
+
+building_holy_guanmiao_terrace = {
+	base_buildtime = @b2_time
+	can_build = no
+	category = unity
+	prerequisites = { "tech_holylight_materialization" }
+	show_tech_unlock_if = { has_valid_civic = civic_holylight_usual }
+	convert_to = {
+		building_holy_church
+		building_heritage_site
+	}
+	allow = { has_upgraded_capital = yes }
+	triggered_desc = { text = building_holy_chapel_effect_desc }
+	ai_resource_production = {
+		trigger = { always = yes }
+		unity = 300
+		holylight_crystal = 100
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b2_minerals
+			holylight_crystal = @b2_holylight_crystal
+		}
+		upkeep = {
+			energy = @b2_upkeep
+		}
+		produces = {
+			energy = 3
+			minerals = 3
+			food = 3
+			trigger = {
+				OR = {
+					has_building = building_holylight_workstation
+					has_building = building_holylight_workstation2
+				}
+			}
+		}
+		produces = {
+			physics_research = 3
+			society_research = 3
+			engineering_research = 3
+			trigger = {
+				OR = {
+					has_building = building_holylight_research_college
+					has_building = building_holylight_research_college2
+					has_building = building_holylight_research_college3
+				}
+			}
+		}
+		produces = {
+			consumer_goods = 2
+			trigger = {
+				OR = {
+					has_building = building_shimmering_gift_plant
+					has_building = building_shimmering_gift_plant2
+					has_building = building_shimmering_gift_plant3
+				}
+			}
+		}
+		produces = {
+			alloys = 1
+			trigger = {
+				OR = {
+					has_building = building_holylight_industry
+					has_building = building_holylight_industry2
+					has_building = building_holylight_industry3
+				}
+			}
+		}
+		produces = {
+			sr_christian = 0.5
+			trigger = { has_building = building_christian_training_sector }
+		}
+		produces = {
+			sr_beauty = 0.25
+			trigger = { has_building = building_heaven_college }
+		}
+	}
+	planet_modifier = {
+		trade_value_add = 8
+		job_holy_prayer_add = 2
+		job_holy_friar_add = 6
+		planet_max_buildings_add = 1
+	}
+	destroy_trigger = {
+		OR = {
+			can_build_asceticism_buildings = no
+			NOT = { owner = { has_valid_civic = civic_holylight_usual } }
+		}
+	}
+	upgrades = { building_holy_taiqing_palace }
+}
+
+building_holy_taiqing_palace = {
+	base_buildtime = @b3_time
+	can_build = no
+	category = unity
+	prerequisites = { "tech_holylight_worship" }
+	show_tech_unlock_if = { has_valid_civic = civic_holylight_usual }
+	convert_to = {
+		building_holy_cathedral
+		building_hypercomms_forum
+	}
+	allow = { has_major_upgraded_capital = yes }
+	triggered_desc = { text = building_holy_chapel_effect_desc }
+	ai_resource_production = {
+		trigger = { always = yes }
+		unity = 500
+		holylight_crystal = 200
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b3_minerals
+			holylight_crystal = @b3_holylight_crystal
+		}
+		upkeep = {
+			energy = @b3_upkeep
+		}
+		produces = {
+			energy = 4.5
+			minerals = 4.5
+			food = 4.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_workstation
+					has_building = building_holylight_workstation2
+				}
+			}
+		}
+		produces = {
+			physics_research = 4.5
+			society_research = 4.5
+			engineering_research = 4.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_research_college
+					has_building = building_holylight_research_college2
+					has_building = building_holylight_research_college3
+				}
+			}
+		}
+		produces = {
+			consumer_goods = 3
+			trigger = {
+				OR = {
+					has_building = building_shimmering_gift_plant
+					has_building = building_shimmering_gift_plant2
+					has_building = building_shimmering_gift_plant3
+				}
+			}
+		}
+		produces = {
+			alloys = 1.5
+			trigger = {
+				OR = {
+					has_building = building_holylight_industry
+					has_building = building_holylight_industry2
+					has_building = building_holylight_industry3
+				}
+			}
+		}
+		produces = {
+			sr_christian = 0.75
+			trigger = { has_building = building_christian_training_sector }
+		}
+		produces = {
+			sr_beauty = 0.375
+			trigger = { has_building = building_heaven_college }
+		}
+	}
+	planet_modifier = {
+		trade_value_add = 12
+		job_holylight_bishop_add = 1
+		job_holy_prayer_add = 4
+		job_holy_friar_add = 8
+		planet_max_buildings_add = 1
+	}
+	destroy_trigger = {
+		OR = {
+			can_build_asceticism_buildings = no
+			NOT = { owner = { has_valid_civic = civic_holylight_usual } }
+		}
+	}
+}
+
+############其他凝聚############
+#圣光广场
+building_holylight_square = {
+	base_buildtime = @b2_time
+	base_cap_amount = 1
+	category = amenity
+	prerequisites = { "tech_forced_belief" }
+	potential = { can_build_asceticism_buildings = yes }
+	allow = {
+		has_upgraded_capital = yes
+		OR = {
+			has_building = building_holy_church
+			has_building = building_holy_cathedral
+			has_building = building_national_cathedral
+			has_building = building_holy_guanmiao_terrace
+			has_building = building_holy_taiqing_palace
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b2_minerals
+		}
+		upkeep = {
+			energy = @b2_upkeep
+			sr_christian = @b2_sr_christian_upkeep
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { is_regular_empire = yes }
+		}
+		modifier = {
+			job_holylight_missionary_add = 4
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				is_regular_empire = yes
+				has_technology = tech_fanatic_train
+			}
+		}
+		modifier = {
+			job_holylight_garrison_add = 2
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				is_regular_empire = yes
+				has_technology = tech_spiritual_gurus
+			}
+		}
+		modifier = {
+			job_spiritual_gurus_add = 2
+		}
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+}
+
+# 圣洁巨像
+building_holy_statue = {
+	base_buildtime = @b4_time
+	category = government
+	empire_limit = { base = 1 }
+	potential = { can_build_asceticism_buildings = yes }
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b4_minerals
+			influence = @b4_influence
+		}
+		upkeep = {
+			energy = @b4_upkeep
+		}
+		produces = {
+			influence = 1
+			unity = 10
+		}
+	}
+	country_modifier = {
+		planet_jobs_unity_produces_mult = 0.05
+	}
+	allow = { has_upgraded_capital = yes }
+	prerequisites = { "tech_galactic_administration" }
+	show_tech_unlock_if = { is_pure_empire = yes }
+	on_built = { hidden_effect = { owner = { country_event = { id = CM_daily.73 } } } }
+	destroy_trigger = { can_build_asceticism_buildings = no }
+}
+
+############################
+###########研究建筑###########
+############################
+############研究室############
+#圣光研究室
+building_holylight_research_college = {
+	base_buildtime = @b1_time
+	category = research
+	prerequisites = { "tech_holylight_research" }
+	convert_to = { building_research_lab_1 }
+	potential = { can_build_asceticism_buildings = yes }
+	destroy_trigger = { can_build_asceticism_buildings = no }
+	ai_resource_production = {
+		trigger = { always = yes }
+		physics_research = 30
+		engineering_research = 30
+		society_research = 30
+	}
+	allow = {
+		OR = {
+			is_owned_prayer_buildings = yes
+			owner = { has_origin = origin_INN_destruction_light }
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b1_minerals
+		}
+		upkeep = {
+			energy = @b1_upkeep
+		}
+	}
+	planet_modifier = {
+		job_holylight_researcher_add = 2
+	}
+	triggered_planet_modifier = {
+		potential = { owner = { has_origin = origin_INN_destruction_light } }
+		job_holylight_analyzer_add = 1
+		planet_max_buildings_add = 1
+	}
+	upgrades = { building_holylight_research_college2 }
+}
+
+#圣光研究副楼
+building_holylight_research_college2 = {
+	base_buildtime = @b2_time
+	category = research
+	can_build = no
+	prerequisites = { "tech_holylight_deep_research" }
+	convert_to = { building_research_lab_2 }
+	destroy_trigger = { can_build_asceticism_buildings = no }
+	ai_resource_production = {
+		trigger = { always = yes }
+		physics_research = 100
+		engineering_research = 100
+		society_research = 100
+	}
+	allow = {
+		OR = {
+			has_building = building_holy_church
+			has_building = building_holy_cathedral
+			has_building = building_national_cathedral
+			has_building = building_holy_guanmiao_terrace
+			has_building = building_holy_taiqing_palace
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b2_minerals
+			holylight_crystal = @b2_holylight_crystal
+			exotic_gases = @b2_holylight_crystal
+		}
+		upkeep = {
+			energy = @b2_upkeep
+			holylight_crystal = @b2_rare_upkeep
+			exotic_gases = @b2_rare_upkeep
+		}
+	}
+	planet_modifier = {
+		job_holylight_researcher_add = 4
+		planet_jobs_physics_research_produces_mult = 0.01
+		planet_jobs_engineering_research_produces_mult = 0.01
+		planet_jobs_society_research_produces_mult = 0.01
+	}
+	triggered_planet_modifier = {
+		potential = { owner = { has_origin = origin_INN_destruction_light } }
+		job_holylight_analyzer_add = 2
+		planet_max_buildings_add = 1
+	}
+	upgrades = { building_holylight_research_college3 }
+}
+
+#圣光学院
+building_holylight_research_college3 = {
+	base_buildtime = @b3_time
+	category = research
+	can_build = no
+	prerequisites = { "tech_holylight_ex_research" }
+	convert_to = { building_research_lab_3 }
+	ai_resource_production = {
+		trigger = { always = yes }
+		physics_research = 200
+		engineering_research = 200
+		society_research = 200
+	}
+	allow = {
+		OR = {
+			has_building = building_holy_cathedral
+			has_building = building_national_cathedral
+			has_building = building_holy_taiqing_palace
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b3_minerals
+			holylight_crystal = @b3_holylight_crystal
+			exotic_gases = @b3_holylight_crystal
+		}
+		upkeep = {
+			energy = @b3_upkeep
+			holylight_crystal = @b3_rare_upkeep
+			exotic_gases = @b3_rare_upkeep
+		}
+	}
+	planet_modifier = {
+		job_holylight_researcher_add = 6
+		planet_jobs_physics_research_produces_mult = 0.02
+		planet_jobs_engineering_research_produces_mult = 0.02
+		planet_jobs_society_research_produces_mult = 0.02
+	}
+	triggered_planet_modifier = {
+		potential = { owner = { has_origin = origin_INN_destruction_light } }
+		job_holylight_analyzer_add = 3
+		planet_max_buildings_add = 1
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+}
+
+############################
+###########政府建筑###########
+############################
+#圣光结晶统筹中心
+building_holylight_allocate_center = {
+	base_buildtime = @b4_time
+	empire_limit = { base = 1 }
+	category = government
+	prerequisites = { "tech_holylight_allocate" }
+	potential = { can_build_asceticism_buildings = yes }
+	ai_resource_production = {
+		trigger = { always = yes }
+		holylight_crystal = 30
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b4_minerals
+			influence = @b4_influence
+		}
+		upkeep = {
+			energy = @b4_upkeep
+		}
+	}
+	allow = { is_capital = yes }
+	country_modifier = {
+		planet_jobs_holylight_crystal_upkeep_mult = -0.1
+		pop_resettlement_cost_mult = -0.1
+	}
+	destroy_trigger = { can_build_asceticism_buildings = no }
+}
+
+############################
+###########组装建筑###########
+############################
+############通用############
+building_holylight_clone_vats = {
+	base_buildtime = @b1_time
+	category = pop_assembly
+	base_cap_amount = 1
+	convert_to = { building_robot_assembly_plant }
+	potential = {
+		exists = owner
+		owner = {
+			is_pure_empire = yes
+			NOT = { has_origin = origin_INN_world_tree }
+		}
+	}
+	destroy_trigger = {
+		exists = owner
+		owner = {
+			OR = {
+				is_pure_empire = no
+				has_origin = origin_INN_world_tree
+			}
+		}
+	}
+	triggered_desc = { text = only_assembly_magical_girl }
+	planet_modifier = {
+		planet_pop_assembly_organic_add = 2
+	}
+	resources = {
+		category = planet_buildings
+		produces = {
+			holylight_crystal = 3
+		}
+		cost = {
+			minerals = @b1_minerals
+			energy = @b1_minerals
+		}
+		upkeep = {
+			energy = @b1_upkeep
+		}
+		upkeep = {
+			trigger = { exists = assembling_species }
+			food = 6
+		}
+	}
+	triggered_desc = {
+		trigger = {
+			OR = {
+				has_building = building_robot_assembly_plant
+				AND = {
+					exists = assembling_species
+					assembling_species = { is_robotic_species = yes }
+				}
+			}
+		}
+		text = tooltip_organic_and_artificial_assembly_warning
+	}
+	upgrades = { building_holylight_clone_vats_2 }
+}
+
+#圣女二级组装厂
+building_holylight_clone_vats_2 = {
+	base_buildtime = @b2_time
+	category = pop_assembly
+	convert_to = { building_robot_assembly_plant }
+	can_build = no
+	prerequisites = { "tech_holylight_clone_vats_2" }
+	potential = {
+		exists = owner
+		owner = {
+			is_pure_empire = yes
+			NOT = { has_origin = origin_INN_world_tree }
+		}
+	}
+	destroy_trigger = {
+		exists = owner
+		owner = {
+			OR = {
+				is_pure_empire = no
+				has_origin = origin_INN_world_tree
+			}
+		}
+	}
+	triggered_desc = { text = only_assembly_magical_girl }
+	planet_modifier = {
+		planet_pop_assembly_organic_add = 4
+	}
+	resources = {
+		category = planet_buildings
+		produces = {
+			holylight_crystal = 5
+		}
+		cost = {
+			minerals = @b2_minerals
+			energy = @b2_minerals
+		}
+		upkeep = {
+			energy = @b2_upkeep
+		}
+		upkeep = {
+			trigger = { exists = assembling_species }
+			food = 10
+		}
+	}
+	triggered_desc = {
+		trigger = {
+			OR = {
+				has_building = building_robot_assembly_plant
+				AND = {
+					exists = assembling_species
+					assembling_species = { is_robotic_species = yes }
+				}
+			}
+		}
+		text = tooltip_organic_and_artificial_assembly_warning
+	}
+}
+
+############世界树############
+building_world_tree_0 = {
+	category = pop_assembly
+	can_build = no
+	planet_modifier = {
+		pop_ethic_spiritualist_attraction_mult = 0.5
+		planet_housing_add = 5
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { NOT = { has_origin = origin_INN_world_tree } }
+		}
+		planet_immigration_pull_mult = 0.05
+	}
+	triggered_planet_modifier = {
+		potential = { any_owned_pop = { has_trait = trait_DC_ethic_asceticism } }
+		planet_pop_assembly_organic_add = 2
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		planet_jobs_unity_produces_mult = 0.1
+		planet_stability_add = 5
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { any_owned_planet = { has_building = building_world_tree_2 } }
+		}
+		planet_pop_assembly_organic_add = 1
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { any_owned_planet = { has_building = building_world_tree_3 } }
+		}
+		planet_pop_assembly_organic_add = 2
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { any_owned_planet = { has_building = building_world_tree_4 } }
+		}
+		planet_pop_assembly_organic_add = 3
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { any_owned_planet = { has_building = building_world_tree_5 } }
+		}
+		planet_pop_assembly_organic_add = 4
+	}
+	triggered_desc = { text = only_assembly_magical_girl }
+	resources = {
+		category = planet_buildings
+		upkeep = {
+			trigger = { exists = assembling_species }
+			food = 6
+		}
+	}
+}
+
+building_world_tree_1 = {
+	icon = building_world_tree
+	category = pop_assembly
+	can_build = no
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		planet_jobs_unity_produces_mult = 0.2
+		planet_stability_add = 5
+		planet_crime_mult = -0.1
+	}
+	triggered_planet_modifier = {
+		potential = { any_owned_pop = { has_trait = trait_DC_ethic_asceticism } }
+		planet_pop_assembly_organic_add = 3
+	}
+	planet_modifier = {
+		pop_ethic_spiritualist_attraction_mult = 1
+		planet_immigration_pull_mult = 0.1
+		planet_housing_add = 10
+	}
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		modifier = {
+			all_technology_research_speed = 0.05
+			planet_building_build_speed_mult = 0.1
+			planet_jobs_produces_mult = 0.05
+			planet_jobs_unity_produces_mult = 0.1
+			pop_amenities_usage_mult = -0.05
+			planet_pops_food_upkeep_mult = -0.05
+			planet_pops_consumer_goods_upkeep_mult = -0.05
+			planet_crime_mult = -0.05
+		}
+	}
+	triggered_desc = { text = only_assembly_magical_girl }
+	resources = {
+		category = planet_buildings
+		upkeep = {
+			trigger = { exists = assembling_species }
+			food = 8
+		}
+	}
+	upgrades = { "building_world_tree_2" }
+}
+
+building_world_tree_2 = {
+	icon = building_world_tree
+	base_buildtime = @b1_time
+	category = pop_assembly
+	can_build = no
+	allow = {
+		owner = {
+			count_owned_planet = {
+				limit = { has_building = building_world_tree_0 }
+				count >= 4
+			}
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		planet_jobs_unity_produces_mult = 0.3
+		planet_stability_add = 10
+		planet_crime_mult = -0.2
+	}
+	triggered_planet_modifier = {
+		potential = { any_owned_pop = { has_trait = trait_DC_ethic_asceticism } }
+		planet_pop_assembly_organic_add = 4
+	}
+	planet_modifier = {
+		pop_ethic_spiritualist_attraction_mult = 2
+		planet_immigration_pull_mult = 0.5
+		planet_housing_add = 10
+	}
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		modifier = {
+			all_technology_research_speed = 0.1
+			planet_building_build_speed_mult = 0.2
+			planet_jobs_unity_produces_mult = 0.15
+			planet_jobs_produces_mult = 0.1
+			pop_amenities_usage_mult = -0.1
+			planet_pops_food_upkeep_mult = -0.1
+			planet_pops_consumer_goods_upkeep_mult = -0.1
+			planet_crime_mult = -0.1
+		}
+	}
+	triggered_desc = { text = only_assembly_magical_girl }
+	resources = {
+		category = planet_buildings
+		cost = {
+			food = 800
+			unity = 800
+			influence = 50
+		}
+		upkeep = {
+			trigger = { exists = assembling_species }
+			food = 12
+		}
+	}
+	upgrades = { "building_world_tree_3" }
+}
+
+building_world_tree_3 = {
+	icon = building_world_tree
+	base_buildtime = @b1_time
+	category = pop_assembly
+	can_build = no
+	allow = {
+		owner = {
+			count_owned_planet = {
+				limit = { has_building = building_world_tree_0 }
+				count >= 9
+			}
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		planet_jobs_unity_produces_mult = 0.4
+		planet_stability_add = 15
+		planet_crime_mult = -0.3
+	}
+	triggered_planet_modifier = {
+		potential = { any_owned_pop = { has_trait = trait_DC_ethic_asceticism } }
+		planet_pop_assembly_organic_add = 5
+	}
+	planet_modifier = {
+		pop_ethic_spiritualist_attraction_mult = 3
+		planet_immigration_pull_mult = 1
+		planet_housing_add = 10
+	}
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		modifier = {
+			all_technology_research_speed = 0.15
+			planet_building_build_speed_mult = 0.3
+			planet_jobs_produces_mult = 0.15
+			planet_jobs_unity_produces_mult = 0.2
+			pop_amenities_usage_mult = -0.15
+			planet_pops_food_upkeep_mult = -0.15
+			planet_pops_consumer_goods_upkeep_mult = -0.15
+			planet_crime_mult = -0.15
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			food = 1800
+			unity = 1800
+			influence = 100
+		}
+		upkeep = {
+			trigger = { exists = assembling_species }
+			food = 16
+		}
+	}
+	triggered_desc = { text = only_assembly_magical_girl }
+	upgrades = { "building_world_tree_4" }
+}
+
+building_world_tree_4 = {
+	icon = building_world_tree
+	base_buildtime = @b1_time
+	category = pop_assembly
+	can_build = no
+	allow = {
+		owner = {
+			count_owned_planet = {
+				limit = { has_building = building_world_tree_0 }
+				count >= 16
+			}
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		planet_jobs_unity_produces_mult = 0.5
+		planet_stability_add = 20
+		planet_crime_mult = -0.4
+	}
+	triggered_planet_modifier = {
+		potential = { any_owned_pop = { has_trait = trait_DC_ethic_asceticism } }
+		planet_pop_assembly_organic_add = 6
+	}
+	planet_modifier = {
+		pop_ethic_spiritualist_attraction_mult = 4
+		planet_immigration_pull_mult = 1.5
+		planet_housing_add = 10
+	}
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		modifier = {
+			all_technology_research_speed = 0.2
+			planet_building_build_speed_mult = 0.4
+			planet_jobs_produces_mult = 0.2
+			planet_jobs_unity_produces_mult = 0.25
+			pop_amenities_usage_mult = -0.2
+			planet_pops_food_upkeep_mult = -0.2
+			planet_pops_consumer_goods_upkeep_mult = -0.2
+			planet_crime_mult = -0.2
+		}
+	}
+	triggered_desc = { text = only_assembly_magical_girl }
+	resources = {
+		category = planet_buildings
+		cost = {
+			food = 3200
+			unity = 3200
+			influence = 200
+		}
+		upkeep = {
+			trigger = { exists = assembling_species }
+			food = 20
+		}
+	}
+	upgrades = { "building_world_tree_5" }
+}
+
+building_world_tree_5 = {
+	icon = building_world_tree
+	base_buildtime = @b1_time
+	category = pop_assembly
+	can_build = no
+	allow = {
+		owner = {
+			count_owned_planet = {
+				limit = { has_building = building_world_tree_0 }
+				count >= 25
+			}
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		planet_jobs_unity_produces_mult = 0.8
+		planet_stability_add = 25
+		planet_crime_mult = -0.5
+	}
+	triggered_planet_modifier = {
+		potential = { any_owned_pop = { has_trait = trait_DC_ethic_asceticism } }
+		planet_pop_assembly_organic_add = 8
+	}
+	planet_modifier = {
+		pop_ethic_spiritualist_attraction_mult = 5
+		planet_immigration_pull_mult = 2
+		planet_housing_add = 10
+	}
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_origin = origin_INN_world_tree }
+		}
+		modifier = {
+			all_technology_research_speed = 0.25
+			planet_building_build_speed_mult = 0.5
+			planet_jobs_produces_mult = 0.4
+			planet_jobs_unity_produces_mult = 0.4
+			pop_amenities_usage_mult = -0.3
+			planet_pops_food_upkeep_mult = -0.3
+			planet_pops_consumer_goods_upkeep_mult = -0.3
+			planet_crime_mult = -0.3
+		}
+	}
+	triggered_desc = { text = only_assembly_magical_girl }
+	triggered_desc = { text = building_world_tree_5_effect_desc }
+	resources = {
+		category = planet_buildings
+		cost = {
+			food = 5000
+			unity = 5000
+			influence = 300
+		}
+		upkeep = {
+			trigger = { exists = assembling_species }
+			food = 24
+		}
+	}
+}
+
+############################
+###########特殊建筑###########
+############################
+#高级神圣天罚纪念碑
+building_pure_captured_monument = {
+	base_buildtime = @b4_time
+	category = government
+	empire_limit = { base = 1 }
+	potential = {
+		can_build_asceticism_buildings = yes
+		owner = { has_policy_flag = lust_forbidden }
+
+	}
+	allow = {
+		custom_tooltip = {
+			fail_text = building_need_senior_captives_tooltip
+			owner = { has_country_flag = have_senior_captives }
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			energy = @b4_minerals
+			minerals = @b4_minerals
+		}
+		upkeep = {
+			energy = @b4_upkeep
+			food = 1
+		}
+		produces = {
+			unity = 1
+			influence = 2
+		}
+	}
+	planet_modifier = {
+		job_holylight_worker_add = 2
+	}
+	country_modifier = {
+		planet_jobs_unity_produces_mult = 0.05
+		planet_crime_add = -20
+	}
+	destroy_trigger = {
+		OR = {
+			can_build_asceticism_buildings = no
+			owner = { NOT = { has_policy_flag = lust_forbidden } }
+		}
+	}
+}
+
+#圣帝行宫
+building_purity_palace = {
+	base_buildtime = @b4_time
+	category = government
+	empire_limit = { base = 1 }
+	prerequisites = { "tech_holylight_in_brain" }
+	show_tech_unlock_if = {
+		OR = {
+			has_authority = auth_oligarchic
+			has_authority = auth_dictatorial
+			has_authority = auth_imperial
+		}
+		has_policy_flag = lust_forbidden
+	}
+	potential = {
+		owner = {
+			OR = {
+				has_authority = auth_oligarchic
+				has_authority = auth_dictatorial
+				has_authority = auth_imperial
+			}
+			is_pure_empire = yes
+			has_policy_flag = lust_forbidden
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = @b4_minerals
+			influence = @b4_influence
+		}
+		upkeep = {
+			consumer_goods = 1
+			food = 1
+		}
+		produces = {
+			influence = 1
+		}
+	}
+	country_modifier = {
+		country_base_unity_produces_add = 50
+		planet_jobs_unity_produces_mult = 0.1
+		planet_decision_enact_speed_mult = 0.2
+	}
+	destroy_trigger = {
+		owner = {
+			OR = {
+				NOR = {
+					has_authority = auth_oligarchic
+					has_authority = auth_dictatorial
+					has_authority = auth_imperial
+				}
+				is_pure_empire = no
+				NOT = { has_policy_flag = lust_forbidden }
+			}
+		}
+	}
+}
+
+# 禁欲改造所
+building_desire_tolerance = {
+	base_buildtime = @b1_time
+	category = army
+	base_cap_amount = 1
+	resources = {
+		category = planet_buildings
+		cost = {
+			energy = @b1_minerals
+			minerals = @b1_minerals
+		}
+		upkeep = {
+			energy = @b1_upkeep
+		}
+		produces = {
+			society_research = 4
+			unity = 5
+		}
+	}
+	prerequisites = { "tech_alien_baptism" }
+	planet_modifier = {
+		job_soldier_add = 2
+		planet_stability_add = 10
+	}
+	allow = { has_upgraded_capital = yes }
+	potential = {
+		owner = {
+			is_pure_empire = yes
+			has_policy_flag = lust_forbidden
+		}
+	}
+	on_built = {
+		hidden_effect = {
+			planet_event = { id = CM_daily.200 days = 1080 }
+			owner = { country_event = { id = CM_daily.50 } }
+		}
+	}
+	destroy_trigger = {
+		owner = {
+			OR = {
+				is_pure_empire = no
+				NOT = { has_policy_flag = lust_forbidden }
+			}
+		}
+	}
+}
+
+#异端处刑场 
+building_purification = {
+	base_buildtime = @b3_time
+	category = army
+	empire_limit = { base = 1 }
+	prerequisites = { "tech_heretic_salvation" }
+	potential = {
+		owner = {
+			is_pure_empire = yes
+			has_policy_flag = lust_forbidden
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			energy = @b3_minerals
+			minerals = @b3_minerals
+		}
+		upkeep = {
+			energy = @b3_upkeep
+		}
+		produces = {
+			unity = 15
+		}
+	}
+	country_modifier = {
+		pop_government_ethic_attraction = 0.5
+		pop_happiness = 0.05
+	}
+	planet_modifier = {
+		job_enforcer_add = 1
+		job_soldier_add = 2
+		planet_army_build_speed_mult = 0.5
+	}
+	allow = {
+		custom_tooltip = {
+			text = "requires_building_capital_2"
+			planet = { has_upgraded_capital = yes }
+		}
+	}
+	on_built = {
+		hidden_effect = {
+			planet_event = { id = CM_daily.220 days = 1080 }
+			owner = { country_event = { id = CM_daily.60 } }
+		}
+	}
+	destroy_trigger = {
+		owner = {
+			OR = {
+				is_pure_empire = no
+				NOT = { has_policy_flag = lust_forbidden }
+			}
+		}
+	}
+}
