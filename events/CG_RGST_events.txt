@@ -1,0 +1,15 @@
+#自动呼唤龙
+namespace = CG_rgst
+country_event = {
+	id = CG_rgst.1
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		has_country_flag = rgst_auto_dragon_knight_open
+	}
+    immediate = {
+        capital_scope = {
+            select_decision = { name = decision_INN_dragon_knight } 
+        }
+    }
+}
