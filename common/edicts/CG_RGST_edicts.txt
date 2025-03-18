@@ -1,0 +1,19 @@
+rgst_auto_dragon_knight = {
+	length = -1
+	icon = "GFX_edict_type_policy"
+	resources = {
+		category = edicts
+	}
+	potential = {
+		has_origin = origin_INN_dragon_knight
+	}
+	effect = {
+		hidden_effect = {
+			set_country_flag = rgst_auto_dragon_knight_open
+			country_event = { id = CG_rgst.1 days = 0 }
+		}
+	}
+	ai_weight = {
+		weight = 0
+	}
+}
