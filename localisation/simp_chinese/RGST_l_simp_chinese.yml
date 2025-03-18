@@ -15,3 +15,6 @@ district_holylight_gift_artisan_desc:0 "只是普通的合金区划"
 圣光区划设计     
 tech_holylight_districts_design:0 "圣光区划设计"
 tech_holylight_districts_design_desc:0 "通过在建造过程中适当使用圣光结晶，我们可以大幅减少区划产生的规模。"
+
+edict_rgst_auto_dragon_knight:0 "自动呼唤龙"
+edict_rgst_auto_dragon_knight_desc:0 "开启后每年检测一次，条件允许则在首都触发龙与少女决议。"
